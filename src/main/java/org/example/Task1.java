@@ -2,21 +2,22 @@ package org.example;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Task1 {
 
     static List<String> namesList = Arrays.asList("Ivan","Peter","Ringo","Viktoriya","Samson","Dora","Arnold","Akira");
 
-    static Names task1String = namesList -> {
+    public static String getNames(List<String> names){
         StringBuilder result = new StringBuilder();
-        for (int i = 1; i < namesList.size(); i += 2) {
-            result.append(i + ". ").append(namesList.get(i) + ", ");
-        }
+        IntStream.range(0, names.size())
+                .filter( i -> i % 2 == 0)
+                .forEach(i -> result.append((i + 1) + ". ").append(names.get(i)).append(", "));
         return result.toString();
-    };
-
+    }
     public static void main(String[] args) {
 
-        System.out.println(task1String.namesByOddIndex(namesList));
+        System.out.println(getNames(namesList));
     }
 }
